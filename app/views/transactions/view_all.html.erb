@@ -1,0 +1,77 @@
+<!-- Page Heading -->
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="page-header">
+      CSP Transaction Management
+    </h2>
+    <ol class="breadcrumb">
+      <li>
+        <%= link_to dashboard_index_path do %>
+            <i class="fa fa-home"></i> Home
+        <% end %>
+      </li>
+      <li class="active">
+        <i class="fa fa-list"></i> CSP Transaction Management
+      </li>
+    </ol>
+  </div>
+</div>
+<!-- /.row -->
+<% i=1 %>
+
+<%= flash_messages %>
+<br/>
+<br/>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Available CSP EOD Transactions (Date Wise)
+  </div>
+  <!-- /.panel-heading -->
+  <div class="panel-body">
+    <% if @transactions.blank? %>
+        <div class="alert alert-danger">
+          <strong>OPPS!</strong> There are no Transactions in the System.
+        </div>
+    <% else %>
+        <div class="table-responsive">
+
+          <table class="table table-bordered table-hover table-striped"
+                 data-toggle="table"
+                 data-cache="true"
+                 data-url="data1.json"
+                 data-height="555"
+                 data-pagination="true"
+                 data-show-refresh="true"
+                 data-show-columns="true"
+                 data-search="true"
+          >
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>DATE</th>
+              <th>CSP Participate</th>
+              <th data-align="right" data-halign="left">Amount</th>
+              <th colspan="3">ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @transactions.each do |trans| %>
+                <tr>
+                  <td><%= i %></td>
+                  <td><%= trans[0].strftime("%d-%m-%Y") %></td>
+                  <td><%# trans[1] %></td>
+                  <td><%= trans[1].abs.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")%></td>
+                  <td><%= link_to 'View Transactions', {:action => :get_details, :id=>trans[0]}, class: 'btn btn-info btn-xs' %>
+                    <%= link_to 'Export PDF' , {:action => :to_print_pdf, :id=>trans[0]}, class:'btn btn-warning btn-xs' %>
+                    <%= link_to 'Export TEXT' , {:action => :to_print_pdf, :id=>trans[0]}, class:'btn btn-success btn-xs' %>
+                  </td>
+                </tr>
+                <% i = i + 1 %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,15 @@
+<%= bootstrap_form_for(@account) do |f| %>
+    <%= f.text_field :csp_code, placeholder: 'Enter CSP Code', label: 'Enter CSP Code'%>
+    <%= f.text_field :name, placeholder: 'Enter Name of CSP',label: 'Enter CSP Name' %>
+    <%= f.text_field :mobile, placeholder: 'Enter Mobile Number',label: 'Enter Mobile Number' %>
+    <%= f.text_field :state, placeholder: 'Enter State',label: 'Enter State' %>
+    <%= f.text_field :location, placeholder: 'Enter Location of CSP',label: 'Enter CSP Location' %>
+    <%= f.text_field :address, placeholder: 'Enter Address of CSP',label: 'Enter Address of CSP' %>
+<hr>
+    <%= f.text_field :account_number, placeholder: 'Enter Account Number as per Records' ,label: 'Enter Bank Account'%>
+    <%= f.text_field :bank_name, placeholder: 'Enter Name of Bank',label: 'Enter Name of Bank' %>
+    <%= f.text_field :branch_name, placeholder: 'Enter Name of Branch',label: 'Enter Name of Branch' %>
+    <%= f.text_field :ifsc, placeholder: 'Enter IFSC',label: 'Enter IFSC' %>
+    <%= f.submit 'Submit' %>
+
+<% end %>

@@ -1,0 +1,6 @@
+<%= bootstrap_form_for(@role) do |f| %>
+    <%= f.text_field :name, placeholder: 'Enter Name of Role' %>
+    <%= f.text_field :description, placeholder: 'Enter Description of Role' %>
+    <%= f.text_field :reference_code, help: 'Example: Admin', placeholder: 'Enter Reference Code' %>
+    <%= f.submit 'Submit' %>
+<% end %>

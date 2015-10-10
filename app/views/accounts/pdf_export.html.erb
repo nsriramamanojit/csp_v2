@@ -1,0 +1,37 @@
+<% i=1 %>
+<% total = 0 %>
+<p align="center">CSP Accounts Statement </p>
+<% if @accounts.blank? %>
+    <strong>OPPS!</strong> There are no CSP Accounts in the System.
+<% else %>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>CSP Code</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>bank_name</th>
+        <th>District</th>
+        <th>Account</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @accounts.each do |account| %>
+          <tr>
+            <td><%= i %></td>
+            <td><%= account.csp_code.upcase %></td>
+            <td><%= account.name.titleize %></td>
+            <td><%= account.location %></td>
+            <td><%= account.bank_name %></td>
+            <td><%= account.district %></td>
+            <td><%= account.account_number %></td>
+          </tr>
+          <% i = i + 1 %>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+

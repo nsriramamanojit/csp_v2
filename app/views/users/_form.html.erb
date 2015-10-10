@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(@user) do |f| %>
+    <%= f.text_field :name, placeholder: 'Enter Name' %>
+    <%= f.email_field :email, placeholder: 'Enter Name Email' %>
+    <%= f.text_field :mobile, placeholder: 'Enter Mobile' %>
+    <%= f.password_field :password, placeholder: 'Enter Name Password',help: 'Must be at least 4 characters long' %>
+    <%= f.password_field :password_confirmation, label: 'Confirm Password', placeholder:'Confirm Password' %>
+    <%= f.collection_check_boxes :roles, Role.all, :id, :name %>
+    <%= f.submit 'Submit' %>
+<% end %>

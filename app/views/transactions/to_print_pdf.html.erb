@@ -1,0 +1,43 @@
+<% i=1 %>
+<% total = 0 %>
+<p align="center">CSP Fund Transfer Statement of <%= Date.parse(params[:id]).strftime("%d-%m-%Y") %> </p>
+<% if @transactions.blank? %>
+    <strong>OPPS!</strong> There are no CSP Transactions in the System.
+<% else %>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>CSP Code</th>
+        <th>Name</th>
+        <th>Account Number</th>
+        <th>Code</th>
+        <th>Amount</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= i %></td>
+            <td><%= transaction.csp_code %></td>
+            <td><%= get_csp_name(transaction) %></td>
+            <td><%= get_csp_account_number(transaction) %></td>
+            <td><%# get_csp_branch_code(transaction) %></td>
+            <% amount = (-1) * transaction.amount %>
+            <td align="right">
+              <% amount= amount % 100 == 0 ? amount : amount - (amount % 100) %>
+              <%= amount.abs.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,") %>
+            </td>
+            <% total += amount %>
+          </tr>
+          <% i = i + 1 %>
+      <% end %>
+      <tr>
+        <td colspan="5" align="right">Total:</td>
+        <td align="right"><%= total.abs.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,") %></td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>
+
+
